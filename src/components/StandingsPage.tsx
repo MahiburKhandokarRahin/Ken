@@ -642,8 +642,8 @@ export const StandingsPage: React.FC = () => {
                       <th className="py-3 px-4 text-center w-14">RANK</th>
                       <th className="py-3 px-2">COUNTRY</th>
                       <th className="py-3 px-3 text-center">POINTS</th>
-                      <th className="py-3 px-3 text-center">CONFEDERATION</th>
-                      <th className="py-3 px-4 text-center">POSITION SHIFT</th>
+                      <th className="py-3 px-3 text-center hidden md:table-cell">CONFEDERATION</th>
+                      <th className="py-3 px-4 text-center hidden sm:table-cell">POSITION SHIFT</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 font-sans font-medium">
@@ -688,14 +688,14 @@ export const StandingsPage: React.FC = () => {
                           </td>
 
                           {/* Confederation */}
-                          <td className="py-3.5 px-3 text-center">
+                          <td className="py-3.5 px-3 text-center hidden md:table-cell">
                             <span className="inline-block text-[10px] px-2 py-0.5 rounded bg-zinc-800/40 text-zinc-400 font-mono border border-white/5 uppercase">
                               {r.confederation}
                             </span>
                           </td>
 
                           {/* Shift Rate indicator */}
-                          <td className="py-3.5 px-4 text-center">
+                          <td className="py-3.5 px-4 text-center hidden sm:table-cell">
                             <div className="flex items-center justify-center gap-1 min-h-[1.5rem]">
                               {r.change > 0 ? (
                                 <span className="inline-flex items-center gap-0.5 text-xs text-emerald-400 font-bold font-mono">

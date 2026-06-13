@@ -447,7 +447,7 @@ export const HLSPlayer: React.FC<HLSPlayerProps> = ({
       )}
 
       {/* Custom Bottom Control Bar */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent transition-transform duration-300 transform translate-y-12 group-hover:translate-y-0 select-none z-20">
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent transition-transform duration-300 transform translate-y-0 md:translate-y-12 md:group-hover:translate-y-0 select-none z-20">
         
         {/* Seek/Status progress track bar (simulated visual for live streams) */}
         <div className="w-full h-1 bg-zinc-850 rounded-full mb-4 overflow-hidden relative">

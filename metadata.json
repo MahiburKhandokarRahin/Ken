@@ -1,5 +1,5 @@
 {
-  "name": "Ken Streaming",
+  "name": "Ken Steaming Live",
   "description": "Live HLS streaming and real-time match center for sports tournaments, featuring multiple channels, live diagnostics HLS telemetry, a simulated fan lounge, and interactive stream metrics.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

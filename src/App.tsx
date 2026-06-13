@@ -17,7 +17,9 @@ import {
   ShieldAlert,
   Sliders,
   Sparkles,
-  Info
+  Info,
+  CalendarDays,
+  Trophy
 } from "lucide-react";
 
 const FAN_USERNAMES = [
@@ -51,7 +53,7 @@ export default function App() {
   const [brokenChannelIds, setBrokenChannelIds] = useState<string[]>([]);
   const [selectedChannel, setSelectedChannel] = useState<StreamChannel>(CHANNELS[0]);
   const [matches, setMatches] = useState<WorldCupMatch[]>(WORLD_CUP_MATCHES);
-  const [selectedMatchId, setSelectedMatchId] = useState<string>("match-1");
+  const [selectedMatchId, setSelectedMatchId] = useState<string>("match-6");
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(INITIAL_CHAT);
   
   const handleChannelError = (channelId: string) => {
@@ -80,7 +82,7 @@ export default function App() {
   // Add a standard chat message
   const handleSendMessage = (text: string) => {
     const newMessage: ChatMessage = {
-      id: `u-${Date.now()}`,
+      id: `u-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       username: "You",
       text: text,
       time: getFormattedTime(),
@@ -92,7 +94,7 @@ export default function App() {
   // Add system / live commentator broadcast
   const addSystemMessage = (text: string) => {
     const systemMsg: ChatMessage = {
-      id: `sys-${Date.now()}`,
+      id: `sys-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       username: "SystemBroadcast",
       text: text,
       time: getFormattedTime(),
@@ -194,6 +196,130 @@ export default function App() {
     );
   };
 
+  // Automatic Score & Match Event Simulator (Runs every 10 seconds)
+  useEffect(() => {
+    const scoreInterval = setInterval(() => {
+      setMatches((prevMatches) => {
+        return prevMatches.map((m) => {
+          if (m.status !== "LIVE") return m;
+
+          // 1. Advance the match timer (minute)
+          let nextTime = m.time;
+          if (m.time.endsWith("'")) {
+            const min = parseInt(m.time, 10);
+            if (!isNaN(min)) {
+              if (min >= 90) {
+                nextTime = "90+1'";
+              } else {
+                nextTime = `${min + 1}'`;
+              }
+            }
+          } else if (m.time.includes("+")) {
+            const extra = parseInt(m.time.split("+")[1], 10);
+            if (!isNaN(extra)) {
+              if (extra >= 5) {
+                nextTime = "90+1'";
+              } else {
+                nextTime = `90+${extra + 1}'`;
+              }
+            }
+          } else {
+            nextTime = "63'";
+          }
+
+          // 2. Roll for Goals or other match events
+          const roll = Math.random();
+          let nextHomeScore = m.homeScore;
+          let nextAwayScore = m.awayScore;
+          let nextStats = m.stats ? { ...m.stats } : undefined;
+
+          if (roll < 0.12) {
+            // GOAL SCORING EVENT!
+            const isHomeGoal = Math.random() > 0.5;
+            if (isHomeGoal) {
+              nextHomeScore += 1;
+            } else {
+              nextAwayScore += 1;
+            }
+
+            if (nextStats) {
+              const idx = isHomeGoal ? 0 : 1;
+              nextStats.shotsOnTarget[idx] += 1;
+            }
+
+            const teamObj = isHomeGoal 
+              ? { name: m.homeTeam, flag: m.homeFlag, code: m.homeCode } 
+              : { name: m.awayTeam, flag: m.awayFlag, code: m.awayCode };
+            
+            // Squad listings
+            const squadMap: Record<string, string[]> = {
+              BRA: ["Vinicius Jr.", "Neymar Jr.", "Rodrygo", "Richarlison", "Raphinha"],
+              MAR: ["Ziyech", "En-Nesyri", "Boufal", "Hakimi", "Amrabat"],
+              MEX: ["Jiménez", "Lozano", "Corona", "Martin", "Chávez"],
+              RSA: ["Tau", "Zwane", "Mayambela", "Lepasa", "Mokoena"],
+              KOR: ["Son Heung-min", "Hwang Hee-chan", "Cho Gue-sung", "Lee Kang-in"],
+              CZE: ["Schick", "Souček", "Hložek", "Černý", "Chytil"],
+              CAN: ["David", "Davies", "Larin", "Buchanan", "Eustáquio"],
+              BIH: ["Džeko", "Stevanović", "Demirović", "Krunić", "Pjanić"],
+              USA: ["Pulisic", "Weah", "Balogun", "McKennie", "Musah"],
+              PAR: ["Almirón", "Sanabria", "Enciso", "Ávalos", "Gómez"]
+            };
+
+            const squad = squadMap[teamObj.code] || ["Striker", "Midfielder", "Playmaker", "Winger"];
+            const scorerName = squad[Math.floor(Math.random() * squad.length)];
+
+            const comment = `⚽ GOAL ALERT! ${teamObj.flag} ${teamObj.name} SCORES! A majestic finish by ${scorerName}! New Score: ${nextHomeScore} - ${nextAwayScore} (${nextTime}) 🎉`;
+            
+            setTimeout(() => addSystemMessage(comment), 10);
+
+          } else if (roll < 0.45 && nextStats) {
+            // General game events (Fouls, Shots, Corners)
+            const eventType = Math.random();
+            const isHomeEvent = Math.random() > 0.5;
+            const teamObj = isHomeEvent ? { name: m.homeTeam, flag: m.homeFlag } : { name: m.awayTeam, flag: m.awayFlag };
+            const idx = isHomeEvent ? 0 : 1;
+            let comment = "";
+
+            if (eventType < 0.35) {
+              const onTarget = Math.random() > 0.4;
+              if (onTarget) {
+                nextStats.shotsOnTarget[idx] += 1;
+                comment = `🎯 SHOT ON TARGET! ${teamObj.flag} ${teamObj.name} cracks a powerful drive saved by the keeper! (${nextTime})`;
+              } else {
+                nextStats.shotsOffTarget[idx] += 1;
+                comment = `🥅 SHOT WIDE! ${teamObj.flag} ${teamObj.name} midfielder blasts a long-range shot over the bar. (${nextTime})`;
+              }
+            } else if (eventType < 0.70) {
+              nextStats.fouls[idx] += 1;
+              const cardDraw = Math.random() > 0.85;
+              if (cardDraw) {
+                nextStats.yellowCards[idx] += 1;
+                comment = `🟨 YELLOW CARD! Rough tackle by ${teamObj.flag} ${teamObj.name} defender results in a booking! (${nextTime})`;
+              } else {
+                comment = `⚠️ FOUL! Free kick awarded after rough contact by ${teamObj.flag} ${teamObj.name}. (${nextTime})`;
+              }
+            } else {
+              nextStats.corners[idx] += 1;
+              comment = `🚩 CORNER KICK! Swift defensive clearance awards ${teamObj.flag} ${teamObj.name} an offensive corner. (${nextTime})`;
+            }
+
+            setTimeout(() => addSystemMessage(comment), 10);
+          }
+
+          return {
+            ...m,
+            time: nextTime,
+            homeScore: nextHomeScore,
+            awayScore: nextAwayScore,
+            stats: nextStats
+          };
+        });
+      });
+    }, 10000);
+
+    return () => clearInterval(scoreInterval);
+  }, []);
+
   // Generate simulated fan active chat every 8 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -202,7 +328,7 @@ export default function App() {
       const randomColor = AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)];
 
       const newSimMessage: ChatMessage = {
-        id: `s-${Date.now()}`,
+        id: `s-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         username: randomUsername,
         text: randomMessage,
         time: getFormattedTime(),
@@ -254,7 +380,7 @@ export default function App() {
           {/* Logo & Category Links */}
           <div className="flex items-center gap-6 md:gap-8">
             <div className="text-xl md:text-2xl font-black tracking-tighter text-[#00FF66] flex items-center gap-1.5 uppercase font-display">
-              KEN <span className="text-white">STREAMING</span>
+              KEN <span className="text-white">STEAMING LIVE</span>
             </div>
             
             <div className="hidden md:flex gap-6 text-xs font-semibold uppercase tracking-wider text-zinc-400">
@@ -417,7 +543,7 @@ export default function App() {
       </main>
 
       {/* Footer credits and information */}
-      <footer className="mt-12 py-10 bg-black/60 border-t border-white/5 text-center text-xs text-zinc-500 select-none">
+      <footer className="mt-12 py-10 pb-28 md:pb-10 bg-black/60 border-t border-white/5 text-center text-xs text-zinc-500 select-none">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px]">
           <div className="flex items-center gap-1.5">
             <Tv className="w-3.5 h-3.5 text-gold" />
@@ -428,6 +554,42 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Mobile Floating Bottom Tab Bar Navigation */}
+      <nav id="mobile-floating-nav" className="md:hidden fixed bottom-4 left-4 right-4 z-40 bg-[#0e0e0e]/95 backdrop-blur-lg border border-white/10 rounded-2xl py-3.5 px-6 shadow-2xl shadow-black/80 flex items-center justify-around text-zinc-400">
+        <button
+          id="btn-nav-home"
+          onClick={() => setActiveTab("home")}
+          className={`flex flex-col items-center gap-1.5 transition-all duration-200 cursor-pointer ${
+            activeTab === "home" ? "text-[#00FF66] scale-105" : "hover:text-white active:scale-95"
+          }`}
+        >
+          <Tv className="w-5 h-5" />
+          <span className="text-[10px] font-bold tracking-tight">Stream</span>
+        </button>
+
+        <button
+          id="btn-nav-matches"
+          onClick={() => setActiveTab("matches")}
+          className={`flex flex-col items-center gap-1.5 transition-all duration-200 cursor-pointer ${
+            activeTab === "matches" ? "text-[#00FF66] scale-105" : "hover:text-white active:scale-95"
+          }`}
+        >
+          <CalendarDays className="w-5 h-5" />
+          <span className="text-[10px] font-bold tracking-tight">Fixtures</span>
+        </button>
+
+        <button
+          id="btn-nav-standings"
+          onClick={() => setActiveTab("standings")}
+          className={`flex flex-col items-center gap-1.5 transition-all duration-200 cursor-pointer ${
+            activeTab === "standings" ? "text-[#00FF66] scale-105" : "hover:text-white active:scale-95"
+          }`}
+        >
+          <Trophy className="w-5 h-5" />
+          <span className="text-[10px] font-bold tracking-tight">Standings</span>
+        </button>
+      </nav>
 
     </div>
   );

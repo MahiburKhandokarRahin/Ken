@@ -169,9 +169,15 @@ export const MatchCenter: React.FC<MatchCenterProps> = ({
 
       {/* Synchronized Match Selector header (Allows matching broadcast overlays) */}
       <div className="p-3 bg-black/30 rounded-xl border border-white/5 mb-4 flex flex-col gap-2">
-        <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">
-          Current Broadcast Target:
-        </label>
+        <div className="flex items-center justify-between">
+          <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">
+            Current Broadcast Target:
+          </label>
+          <span className="flex items-center gap-1.5 text-[8px] sm:text-[9px] font-mono font-bold text-[#00FF66] bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 animate-pulse">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00FF66]" />
+            AUTO-SCORE ACTIVE (10S)
+          </span>
+        </div>
         <div className="flex gap-2 items-center overflow-x-auto no-scrollbar py-0.5">
           {matches.map((match) => {
             const isSelected = match.id === selectedMatchId;
@@ -179,15 +185,43 @@ export const MatchCenter: React.FC<MatchCenterProps> = ({
               <button
                 key={match.id}
                 onClick={() => onSelectMatch(match.id)}
-                className={`px-3 py-1.5 rounded-lg text-left transition-all border shrink-0 cursor-pointer ${
+                className={`px-3 py-2 rounded-xl text-left transition-all border shrink-0 cursor-pointer ${
                   isSelected 
-                    ? "bg-[#181818] border-gold text-white font-bold" 
-                    : "bg-black/60 border-white/5 hover:border-white/10 text-zinc-400 text-xs"
+                    ? "bg-[#1d1d1d] border-gold text-white font-bold shadow-lg shadow-gold/10" 
+                    : "bg-black/60 border-white/5 hover:border-white/10 text-zinc-400"
                 }`}
               >
-                <div className="flex items-center gap-1.5 text-[11px]">
-                  <span>{match.homeFlag} vs {match.awayFlag}</span>
-                  <span className="opacity-80 font-mono text-[9px] uppercase">{match.homeCode} / {match.awayCode}</span>
+                <div className="flex flex-col gap-1">
+                  {/* Flags and country abbreviation / name with score */}
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <span role="img" aria-label={match.homeTeam}>{match.homeFlag}</span>
+                    <span className="font-semibold text-zinc-250">
+                      {match.homeCode}
+                    </span>
+                    <span className="text-gold font-bold px-1 py-0.5 bg-neutral-900/80 rounded border border-white/5 text-[9px] font-mono">
+                      {match.status === "UPCOMING" ? "vs" : `${match.homeScore}-${match.awayScore}`}
+                    </span>
+                    <span className="font-semibold text-zinc-250">
+                      {match.awayCode}
+                    </span>
+                    <span role="img" aria-label={match.awayTeam}>{match.awayFlag}</span>
+                  </div>
+                  
+                  {/* Status and Time/Time indicator */}
+                  <div className="flex items-center justify-between text-[9px] font-mono text-zinc-500">
+                    <span className={`px-1 rounded-[3px] text-[8px] font-bold uppercase tracking-wide ${
+                      match.status === "LIVE" 
+                        ? "bg-rose-500/15 text-rose-400 border border-rose-500/20 animate-pulse" 
+                        : match.status === "UPCOMING"
+                        ? "bg-blue-500/15 text-blue-400 border border-blue-500/20"
+                        : "bg-zinc-800 text-zinc-400"
+                    }`}>
+                      {match.status}
+                    </span>
+                    <span className="text-zinc-400 font-semibold truncate ml-2 max-w-[120px]">
+                      {match.time}
+                    </span>
+                  </div>
                 </div>
               </button>
             );

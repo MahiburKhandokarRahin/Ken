@@ -11,104 +11,41 @@ import {
 interface FixtureMatch {
   date: string;
   day: string;
-  timeBDT: string;
+  timeBST: string;
   group: string;
   team1: string;
   team2: string;
   venue: string;
+  score?: string;
 }
 
 const FIXTURES_DATA: FixtureMatch[] = [
   // JUN 12
-  { date: "JUN 12", day: "SAT", timeBDT: "01:00 AM", group: "A", team1: "🇲🇽 Mexico", team2: "🇿🇦 South Africa", venue: "Mexico City" },
-  { date: "JUN 12", day: "SAT", timeBDT: "08:00 AM", group: "A", team1: "🇰🇷 South Korea", team2: "🇨🇿 Czechia", venue: "Guadalajara" },
+  { date: "JUN 12", day: "FRI", timeBST: "Completed", group: "A", team1: "🇲🇽 Mexico", team2: "🇿🇦 South Africa", score: "2 – 0", venue: "Mexico City Stadium" },
+  { date: "JUN 12", day: "FRI", timeBST: "Completed", group: "A", team1: "🇰🇷 South Korea", team2: "🇨🇿 Czechia", score: "2 – 1", venue: "Guadalajara Stadium" },
   // JUN 13
-  { date: "JUN 13", day: "SAT", timeBDT: "01:00 AM", group: "B", team1: "🇨🇦 Canada", team2: "🇧🇦 Bosnia & Herz.", venue: "Toronto" },
-  { date: "JUN 13", day: "SAT", timeBDT: "07:00 AM", group: "D", team1: "🇺🇸 USA", team2: "🇵🇾 Paraguay", venue: "Los Angeles" },
+  { date: "JUN 13", day: "SAT", timeBST: "Completed", group: "B", team1: "🇨🇦 Canada", team2: "🇧🇦 Bosnia & Herz.", score: "1 – 1", venue: "Toronto Stadium" },
+  { date: "JUN 13", day: "SAT", timeBST: "Completed", group: "D", team1: "🇺🇸 USA", team2: "🇵🇾 Paraguay", score: "4 – 1", venue: "Los Angeles Stadium" },
   // JUN 14
-  { date: "JUN 14", day: "SUN", timeBDT: "01:00 AM", group: "B", team1: "🇶🇦 Qatar", team2: "🇨🇭 Switzerland", venue: "San Francisco" },
-  { date: "JUN 14", day: "SUN", timeBDT: "04:00 AM", group: "C", team1: "🇧🇷 Brazil", team2: "🇲🇦 Morocco", venue: "New York NJ" },
-  { date: "JUN 14", day: "SUN", timeBDT: "07:00 AM", group: "C", team1: "🇭🇹 Haiti", team2: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", venue: "Boston" },
-  { date: "JUN 14", day: "SUN", timeBDT: "10:00 AM", group: "D", team1: "🇦🇺 Australia", team2: "🇹🇷 Turkey", venue: "Vancouver" },
-  { date: "JUN 14", day: "SUN", timeBDT: "11:00 PM", group: "E", team1: "🇩🇪 Germany", team2: "🇨🇼 Curacao", venue: "Houston" },
-  // JUN 16 MON
-  { date: "JUN 16", day: "MON", timeBDT: "02:00 AM", group: "F", team1: "🇳🇱 Netherlands", team2: "🇯🇵 Japan", venue: "Dallas" },
-  { date: "JUN 16", day: "MON", timeBDT: "05:00 AM", group: "E", team1: "🇨🇮 Ivory Coast", team2: "🇪🇨 Ecuador", venue: "Philadelphia" },
-  { date: "JUN 16", day: "MON", timeBDT: "08:00 AM", group: "F", team1: "🇸🇪 Sweden", team2: "🇹🇳 Tunisia", venue: "Monterrey" },
-  { date: "JUN 16", day: "MON", timeBDT: "10:00 PM", group: "H", team1: "🇪🇸 Spain", team2: "🇨🇻 Cape Verde", venue: "Atlanta" },
-  // JUN 16 TUE
-  { date: "JUN 16", day: "TUE", timeBDT: "01:00 AM", group: "G", team1: "🇧🇪 Belgium", team2: "🇪🇬 Egypt", venue: "Seattle" },
-  { date: "JUN 16", day: "TUE", timeBDT: "04:00 AM", group: "H", team1: "🇸🇦 Saudi Arabia", team2: "🇺🇾 Uruguay", venue: "Miami" },
-  { date: "JUN 16", day: "TUE", timeBDT: "07:00 AM", group: "A", team1: "🇮🇷 Iran", team2: "🇳🇿 New Zealand", venue: "Los Angeles" },
+  { date: "JUN 14", day: "SUN", timeBST: "01:00 AM", group: "B", team1: "🇶🇦 Qatar", team2: "🇨🇭 Switzerland", venue: "San Francisco Bay Area Stadium" },
+  { date: "JUN 14", day: "SUN", timeBST: "04:00 AM", group: "C", team1: "🇧🇷 Brazil", team2: "🇲🇦 Morocco", venue: "New York NJ Stadium" },
+  { date: "JUN 14", day: "SUN", timeBST: "07:00 AM", group: "C", team1: "🇭🇹 Haiti", team2: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", venue: "Boston Stadium" },
+  { date: "JUN 14", day: "SUN", timeBST: "10:00 AM", group: "D", team1: "🇦🇺 Australia", team2: "🇹🇷 Türkiye", venue: "BC Place Vancouver" },
+  { date: "JUN 14", day: "SUN", timeBST: "11:00 PM", group: "E", team1: "🇩🇪 Germany", team2: "🇨🇼 Curaçao", venue: "Houston Stadium" },
+  // JUN 15
+  { date: "JUN 15", day: "MON", timeBST: "02:00 AM", group: "F", team1: "🇳🇱 Netherlands", team2: "🇯🇵 Japan", venue: "Dallas Stadium" },
+  { date: "JUN 15", day: "MON", timeBST: "05:00 AM", group: "E", team1: "🇨🇮 Ivory Coast", team2: "🇪🇨 Ecuador", venue: "Philadelphia Stadium" },
+  { date: "JUN 15", day: "MON", timeBST: "08:00 AM", group: "F", team1: "🇸🇪 Sweden", team2: "🇹🇳 Tunisia", venue: "Monterrey Stadium" },
+  { date: "JUN 15", day: "MON", timeBST: "10:00 PM", group: "H", team1: "🇪🇸 Spain", team2: "🇨🇻 Cabo Verde", venue: "Atlanta Stadium" },
+  // JUN 16
+  { date: "JUN 16", day: "TUE", timeBST: "01:00 AM", group: "G", team1: "🇧🇪 Belgium", team2: "🇪🇬 Egypt", venue: "Seattle Stadium" },
+  { date: "JUN 16", day: "TUE", timeBST: "04:00 AM", group: "H", team1: "🇸🇦 Saudi Arabia", team2: "🇺🇾 Uruguay", venue: "Miami Stadium" },
+  { date: "JUN 16", day: "TUE", timeBST: "07:00 AM", group: "G", team1: "🇮🇷 Iran", team2: "🇳🇿 New Zealand", venue: "Los Angeles Stadium" },
   // JUN 17
-  { date: "JUN 17", day: "WED", timeBDT: "01:00 AM", group: "I", team1: "🇫🇷 France", team2: "🇸🇳 Senegal", venue: "New York NJ" },
-  { date: "JUN 17", day: "WED", timeBDT: "04:00 AM", group: "I", team1: "🇮🇶 Iraq", team2: "🇳🇴 Norway", venue: "Boston" },
-  { date: "JUN 17", day: "WED", timeBDT: "07:00 AM", group: "J", team1: "🇦🇷 Argentina", team2: "🇩🇿 Algeria", venue: "Kansas City" },
-  { date: "JUN 17", day: "WED", timeBDT: "10:00 AM", group: "J", team1: "🇦🇹 Austria", team2: "🇯🇴 Jordan", venue: "San Francisco" },
-  { date: "JUN 17", day: "WED", timeBDT: "11:00 PM", group: "K", team1: "🇵🇹 Portugal", team2: "🇨🇩 DR Congo", venue: "Houston" },
-  // JUN 18
-  { date: "JUN 18", day: "THU", timeBDT: "02:00 AM", group: "L", team1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", team2: "🇭🇷 Croatia", venue: "Dallas" },
-  { date: "JUN 18", day: "THU", timeBDT: "08:00 AM", group: "E", team1: "🇬🇭 Ghana", team2: "🇵🇦 Panama", venue: "Toronto" },
-  { date: "JUN 18", day: "THU", timeBDT: "08:00 AM", group: "K", team1: "🇺🇿 Uzbekistan", team2: "🇨🇴 Colombia", venue: "Mexico City" },
-  { date: "JUN 18", day: "THU", timeBDT: "10:00 PM", group: "A", team1: "🇨🇿 Czechia", team2: "🇿🇦 South Africa", venue: "Atlanta" },
-  // JUN 19
-  { date: "JUN 19", day: "FRI", timeBDT: "01:00 AM", group: "B", team1: "🇨🇭 Switzerland", team2: "🇧🇦 Bosnia & Herz.", venue: "Los Angeles" },
-  { date: "JUN 19", day: "FRI", timeBDT: "04:00 AM", group: "B", team1: "🇨🇦 Canada", team2: "🇶🇦 Qatar", venue: "Vancouver" },
-  { date: "JUN 19", day: "FRI", timeBDT: "07:00 AM", group: "A", team1: "🇲🇽 Mexico", team2: "🇰🇷 South Korea", venue: "Guadalajara" },
-  // JUN 20
-  { date: "JUN 20", day: "SAT", timeBDT: "01:00 AM", group: "B", team1: "🇺🇸 USA", team2: "🇦🇺 Australia", venue: "Seattle" },
-  { date: "JUN 20", day: "SAT", timeBDT: "04:00 AM", group: "C", team1: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", team2: "🇲🇦 Morocco", venue: "Boston" },
-  { date: "JUN 20", day: "SAT", timeBDT: "07:00 AM", group: "C", team1: "🇧🇷 Brazil", team2: "🇭🇹 Haiti", venue: "Philadelphia" },
-  { date: "JUN 20", day: "SAT", timeBDT: "10:00 AM", group: "D", team1: "🇹🇷 Turkey", team2: "🇵🇾 Paraguay", venue: "San Francisco" },
-  { date: "JUN 20", day: "SAT", timeBDT: "11:00 PM", group: "F", team1: "🇳🇱 Netherlands", team2: "🇸🇪 Sweden", venue: "Houston" },
-  // JUN 21
-  { date: "JUN 21", day: "SUN", timeBDT: "02:00 AM", group: "E", team1: "🇩🇪 Germany", team2: "🇨🇮 Ivory Coast", venue: "Toronto" },
-  { date: "JUN 21", day: "SUN", timeBDT: "06:00 AM", group: "E", team1: "🇪🇨 Ecuador", team2: "🇨🇼 Curacao", venue: "Kansas City" },
-  { date: "JUN 21", day: "SUN", timeBDT: "10:00 AM", group: "F", team1: "🇹🇳 Tunisia", team2: "🇯🇵 Japan", venue: "Monterrey" },
-  { date: "JUN 21", day: "SUN", timeBDT: "10:00 PM", group: "H", team1: "🇪🇸 Spain", team2: "🇸🇦 Saudi Arabia", venue: "Atlanta" },
-  
-  // COLUMN 2 START (JUN 22)
-  { date: "JUN 22", day: "MON", timeBDT: "01:00 AM", group: "G", team1: "🇧🇪 Belgium", team2: "🇮🇷 Iran", venue: "Los Angeles" },
-  { date: "JUN 22", day: "MON", timeBDT: "06:00 AM", group: "H", team1: "🇺🇾 Uruguay", team2: "🇨🇻 Cape Verde", venue: "Miami" },
-  { date: "JUN 22", day: "MON", timeBDT: "07:00 AM", group: "G", team1: "🇳🇿 New Zealand", team2: "🇪🇬 Egypt", venue: "Vancouver" },
-  { date: "JUN 22", day: "MON", timeBDT: "11:00 PM", group: "J", team1: "🇦🇷 Argentina", team2: "🇦🇹 Austria", venue: "Dallas" },
-  // JUN 23
-  { date: "JUN 23", day: "TUE", timeBDT: "03:00 AM", group: "I", team1: "🇫🇷 France", team2: "🇮🇷 Iran", venue: "Philadelphia" },
-  { date: "JUN 23", day: "TUE", timeBDT: "06:00 AM", group: "I", team1: "🇳🇴 Norway", team2: "🇸🇳 Senegal", venue: "New York NJ" },
-  { date: "JUN 23", day: "TUE", timeBDT: "08:00 AM", group: "J", team1: "🇯🇴 Jordan", team2: "🇩🇿 Algeria", venue: "San Francisco" },
-  { date: "JUN 23", day: "TUE", timeBDT: "11:00 PM", group: "K", team1: "🇵🇹 Portugal", team2: "🇺🇿 Uzbekistan", venue: "Houston" },
-  // JUN 24
-  { date: "JUN 24", day: "WED", timeBDT: "02:00 AM", group: "L", team1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", team2: "🇭🇷 Croatia", venue: "Boston" },
-  { date: "JUN 24", day: "WED", timeBDT: "05:00 AM", group: "L", team1: "🇵🇦 Panama", team2: "🇭🇷 Croatia", venue: "Toronto" },
-  { date: "JUN 24", day: "WED", timeBDT: "08:00 AM", group: "A", team1: "🇨🇴 Colombia", team2: "🇨🇩 DR Congo", venue: "Guadalajara" },
-  // JUN 25
-  { date: "JUN 25", day: "THU", timeBDT: "01:00 AM", group: "B", team1: "🇨🇭 Switzerland", team2: "🇨🇦 Canada", venue: "Vancouver" },
-  { date: "JUN 25", day: "THU", timeBDT: "01:00 AM", group: "B", team1: "🇧🇦 Bosnia & Herz.", team2: "🇶🇦 Qatar", venue: "Seattle" },
-  { date: "JUN 25", day: "THU", timeBDT: "04:00 AM", group: "C", team1: "🇲🇦 Morocco", team2: "🇭🇹 Haiti", venue: "Atlanta" },
-  { date: "JUN 25", day: "THU", timeBDT: "06:00 AM", group: "C", team1: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", team2: "🇧🇷 Brazil", venue: "Miami" },
-  { date: "JUN 25", day: "THU", timeBDT: "07:00 AM", group: "A", team1: "🇿🇦 South Africa", team2: "🇰🇷 South Korea", venue: "Monterrey" },
-  { date: "JUN 25", day: "THU", timeBDT: "07:00 AM", group: "A", team1: "🇨🇿 Czechia", team2: "🇲🇽 Mexico", venue: "Mexico City" },
-  // JUN 26
-  { date: "JUN 26", day: "FRI", timeBDT: "02:00 AM", group: "E", team1: "🇨🇼 Curacao", team2: "🇨🇮 Ivory Coast", venue: "Philadelphia" },
-  { date: "JUN 26", day: "FRI", timeBDT: "02:00 AM", group: "F", team1: "🇪🇨 Ecuador", team2: "🇩🇪 Germany", venue: "New York NJ" },
-  { date: "JUN 26", day: "FRI", timeBDT: "06:00 AM", group: "F", team1: "🇹🇳 Tunisia", team2: "🇳🇱 Netherlands", venue: "Kansas City" },
-  { date: "JUN 26", day: "FRI", timeBDT: "06:00 AM", group: "F", team1: "🇯🇵 Japan", team2: "🇸🇪 Sweden", venue: "Dallas" },
-  { date: "JUN 26", day: "FRI", timeBDT: "06:00 AM", group: "D", team1: "🇹🇷 Turkey", team2: "🇺🇸 USA", venue: "Los Angeles" },
-  { date: "JUN 26", day: "FRI", timeBDT: "08:00 AM", group: "D", team1: "🇵🇾 Paraguay", team2: "🇦🇺 Australia", venue: "San Francisco" },
-  // JUN 27
-  { date: "JUN 27", day: "SAT", timeBDT: "01:00 AM", group: "I", team1: "🇳🇴 Norway", team2: "🇫🇷 France", venue: "Boston" },
-  { date: "JUN 27", day: "SAT", timeBDT: "01:00 AM", group: "I", team1: "🇸🇳 Senegal", team2: "🇮🇶 Iraq", venue: "Toronto" },
-  { date: "JUN 27", day: "SAT", timeBDT: "06:00 AM", group: "H", team1: "🇨🇻 Cape Verde", team2: "🇸🇦 Saudi Arabia", venue: "Houston" },
-  { date: "JUN 27", day: "SAT", timeBDT: "06:00 AM", group: "H", team1: "🇺🇾 Uruguay", team2: "🇪🇸 Spain", venue: "Guadalajara" },
-  { date: "JUN 27", day: "SAT", timeBDT: "09:00 AM", group: "G", team1: "🇳🇿 New Zealand", team2: "🇧🇪 Belgium", venue: "Vancouver" },
-  { date: "JUN 27", day: "SAT", timeBDT: "08:00 AM", group: "G", team1: "🇪🇬 Egypt", team2: "🇮🇷 Iran", venue: "Seattle" },
-  // JUN 28
-  { date: "JUN 28", day: "SUN", timeBDT: "03:00 AM", group: "L", team1: "🇵🇦 Panama", team2: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", venue: "New York NJ" },
-  { date: "JUN 28", day: "SUN", timeBDT: "02:00 AM", group: "L", team1: "🇭🇷 Croatia", team2: "🇬🇭 Ghana", venue: "Philadelphia" },
-  { date: "JUN 28", day: "SUN", timeBDT: "08:30 AM", group: "K", team1: "🇨🇴 Colombia", team2: "🇵🇹 Portugal", venue: "Miami" },
-  { date: "JUN 28", day: "SUN", timeBDT: "05:30 AM", group: "K", team1: "🇨🇩 DR Congo", team2: "🇺🇿 Uzbekistan", venue: "Atlanta" },
-  { date: "JUN 28", day: "SUN", timeBDT: "06:30 AM", group: "J", team1: "🇩🇿 Algeria", team2: "🇦🇹 Austria", venue: "Kansas City" },
-  { date: "JUN 28", day: "SUN", timeBDT: "08:00 AM", group: "J", team1: "🇯🇴 Jordan", team2: "🇦🇷 Argentina", venue: "Dallas" }
+  { date: "JUN 17", day: "WED", timeBST: "01:00 AM", group: "I", team1: "🇫🇷 France", team2: "🇸🇳 Senegal", venue: "New York NJ Stadium" },
+  { date: "JUN 17", day: "WED", timeBST: "04:00 AM", group: "I", team1: "🇮🇶 Iraq", team2: "🇳🇴 Norway", venue: "Boston Stadium" },
+  { date: "JUN 17", day: "WED", timeBST: "07:00 AM", group: "J", team1: "🇦🇷 Argentina", team2: "🇩🇿 Algeria", venue: "Kansas City Stadium" },
+  { date: "JUN 17", day: "WED", timeBST: "08:00 PM", group: "L", team1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", team2: "🇭🇷 Croatia", venue: "Dallas Stadium" }
 ];
 
 const GROUPS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
@@ -129,7 +66,7 @@ const groupColors: Record<string, { text: string; border: string; circle: string
 };
 
 export const FixturesPage: React.FC = () => {
-  const [currentTimezone, setCurrentTimezone] = useState<"BDT" | "LOCAL">("BDT");
+  const [currentTimezone, setCurrentTimezone] = useState<"BST" | "LOCAL">("BST");
   const [currentGroupFilter, setCurrentGroupFilter] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [favorites, setFavorites] = useState<number[]>(() => {
@@ -143,8 +80,11 @@ export const FixturesPage: React.FC = () => {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState<boolean>(false);
   const [countdownText, setCountdownText] = useState<string>("Loading...");
 
-  // BDT (UTC+6) conversion to browser local timezone
-  const convertBDTToLocal = (dateStr: string, timeStr: string) => {
+  // BST (UTC+1) conversion to browser local timezone
+  const convertBSTToLocal = (dateStr: string, timeStr: string) => {
+    if (timeStr === "Completed") {
+      return { date: dateStr, time: "Completed" };
+    }
     try {
       const monthMap: Record<string, number> = { "JUN": 5 };
       const parts = dateStr.split(" ");
@@ -163,12 +103,12 @@ export const FixturesPage: React.FC = () => {
       if (hours === 12) hours = 0;
       if (modifier === "PM") hours += 12;
 
-      // BDT has +6 hours offset. So to get UTC we subtract 6 hours.
-      const bdtDate = new Date(Date.UTC(2026, month, day, hours - 6, minutes));
+      // BST has +1 hour offset. So to get UTC we subtract 1 hour.
+      const bstDate = new Date(Date.UTC(2026, month, day, hours - 1, minutes));
       
       const options: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", hour12: true };
-      const localTimeStr = bdtDate.toLocaleTimeString([], options);
-      const localDateStr = bdtDate.toLocaleDateString([], { month: "short", day: "2-digit", weekday: "short" }).toUpperCase();
+      const localTimeStr = bstDate.toLocaleTimeString([], options);
+      const localDateStr = bstDate.toLocaleDateString([], { month: "short", day: "2-digit", weekday: "short" }).toUpperCase();
       
       return { date: localDateStr, time: localTimeStr };
     } catch (e) {
@@ -246,10 +186,10 @@ export const FixturesPage: React.FC = () => {
   filteredFixtures.forEach(m => {
     let displayDate = m.date;
     let displayDay = m.day;
-    let parsedTime = m.timeBDT;
+    let parsedTime = m.timeBST;
 
     if (currentTimezone === "LOCAL") {
-      const converted = convertBDTToLocal(m.date, m.timeBDT);
+      const converted = convertBSTToLocal(m.date, m.timeBST);
       displayDate = converted.date;
       parsedTime = converted.time;
       displayDay = "";
@@ -279,15 +219,15 @@ export const FixturesPage: React.FC = () => {
             Tournament Schedule Center
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Access the full 64 group stage matches across Canada, Mexico, & USA.
+            Access the full matches across Canada, Mexico, & USA.
           </p>
         </div>
         
-        {/* Right Time zone widgets matched with BDT (Bangladesh Time) vs Countdown */}
+        {/* Right Time zone widgets matched with BST (British Summer Time) vs Countdown */}
         <div className="flex flex-wrap items-center gap-3 justify-end w-full sm:w-auto">
           <div className="bg-neutral-900/90 border border-green-500/10 px-3 py-1.5 rounded-lg text-center min-w-[130px]">
-            <span className="text-[9px] text-slate-500 block uppercase tracking-widest font-bold">Bangladesh Time</span>
-            <span className="mono-font text-xs text-[#00FF66] font-bold">BDT (UTC +6)</span>
+            <span className="text-[9px] text-slate-500 block uppercase tracking-widest font-bold">British Sum. Time</span>
+            <span className="mono-font text-xs text-[#00FF66] font-bold">BST (UTC +1)</span>
           </div>
           <div className="bg-neutral-900/90 border border-green-500/20 px-3 py-1.5 rounded-lg text-center min-w-[130px]">
             <span className="text-[9px] text-[#00FF66] block uppercase tracking-widest font-bold">Countdown to Kickoff</span>
@@ -317,14 +257,14 @@ export const FixturesPage: React.FC = () => {
             <span className="text-[9px] mono-font text-slate-400 uppercase tracking-widest">Select Zone Format:</span>
             <div className="bg-black/80 border border-green-500/15 p-1 rounded-lg flex gap-1">
               <button 
-                onClick={() => setCurrentTimezone("BDT")} 
+                onClick={() => setCurrentTimezone("BST")} 
                 className={`px-3 py-1.5 text-[10px] mono-font font-bold rounded transition-all cursor-pointer ${
-                  currentTimezone === "BDT" 
+                  currentTimezone === "BST" 
                     ? "bg-[#00FF66] text-black shadow-md shadow-green-500/15" 
                     : "text-slate-400 hover:text-slate-100"
                 }`}
               >
-                BDT (+6)
+                BST (+1)
               </button>
               <button 
                 onClick={() => setCurrentTimezone("LOCAL")} 
@@ -410,151 +350,81 @@ export const FixturesPage: React.FC = () => {
         </div>
       )}
 
-      {/* Two-Column Balanced Layout of Fixtures */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
-        
-        {/* Left Side Column of Fixtures */}
-        <div className="space-y-4">
-          {leftColumnKeys.map((dateKey) => {
-            const matchesInside = dateGroups[dateKey] || [];
-            return (
-              <div 
-                key={dateKey} 
-                className="bg-neutral-900/40 border border-green-500/10 rounded-2xl p-4 space-y-3 shadow-xl backdrop-blur-sm transition-all duration-300 hover:border-green-500/20"
-              >
-                <div className="flex items-center justify-between border-b border-green-500/5 pb-2">
-                  <span className="mono-font text-xs font-bold text-[#00FF66] tracking-widest">{dateKey}</span>
-                  <span className="text-[9px] text-slate-500 mono-font">{matchesInside.length} MATCHES</span>
-                </div>
-                
-                <div className="space-y-2.5">
-                  {matchesInside.map((m) => {
-                    const isFav = favorites.includes(m.originalIndex);
-                    const colorStyle = groupColors[m.group] || { text: "text-green-400", bg: "bg-green-500" };
-                    return (
-                      <div 
-                        key={m.originalIndex}
-                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 rounded-xl bg-black/40 border border-green-500/5 hover:border-green-500/30 hover:bg-neutral-950/85 transition-all group"
-                      >
-                        {/* Group and match timing */}
-                        <div className="flex items-center gap-3 w-full sm:w-auto">
-                          <span 
-                            className={`text-[9px] font-extrabold px-2 py-0.5 rounded bg-black border border-green-500/20 ${colorStyle.text}`}
-                            title={`Group ${m.group}`}
-                          >
-                            GRP_{m.group}
-                          </span>
-                          <span className="mono-font text-xs font-semibold text-green-300">
-                            {m.parsedTime}
-                          </span>
-                        </div>
-
-                        {/* Central Match Flags Coupling */}
-                        <div className="flex-1 grid grid-cols-[1fr_auto_1fr] items-center gap-2.5 text-xs font-semibold w-full sm:w-auto text-center font-sans">
-                          <div className="text-right truncate text-slate-100" title={m.team1}>
-                            {m.team1}
-                          </div>
-                          <span className="text-[10px] mono-font text-[#00FF66]/80 px-1 bg-neutral-950 border border-green-500/10 rounded">VS</span>
-                          <div className="text-left truncate text-slate-100" title={m.team2}>
-                            {m.team2}
-                          </div>
-                        </div>
-
-                        {/* Venue location & Star trigger */}
-                        <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 border-green-500/5 pt-2 sm:pt-0 shrink-0">
-                          <div className="flex items-center gap-1 text-[11px] text-slate-500 font-sans">
-                            <MapPin className="w-3.5 h-3.5 text-green-500/50" />
-                            <span className="truncate max-w-[110px]" title={m.venue}>{m.venue}</span>
-                          </div>
-                          
-                          <button 
-                            onClick={() => toggleFavorite(m.originalIndex)} 
-                            className="p-1 rounded hover:bg-neutral-950 transition-all text-slate-600 hover:text-green-400 cursor-pointer"
-                          >
-                            <Star className={`w-3.5 h-3.5 ${isFav ? "fill-[#00FF66] text-[#00FF66]" : "text-slate-650"}`} />
-                          </button>
-                        </div>
-
-                      </div>
-                    );
-                  })}
-                </div>
+      {/* Responsive unified grid to maintain chronological order on mobile while keeping dual columns on desktop */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20 items-start">
+        {dateKeys.map((dateKey) => {
+          const matchesInside = dateGroups[dateKey] || [];
+          return (
+            <div 
+              key={dateKey} 
+              className="bg-neutral-900/40 border border-green-500/10 rounded-2xl p-4 space-y-3 shadow-xl backdrop-blur-sm transition-all duration-300 hover:border-green-500/20"
+            >
+              <div className="flex items-center justify-between border-b border-green-500/5 pb-2">
+                <span className="mono-font text-xs font-bold text-[#00FF66] tracking-widest">{dateKey}</span>
+                <span className="text-[9px] text-slate-500 mono-font">{matchesInside.length} MATCHES</span>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Right Side Column of Fixtures */}
-        <div className="space-y-4">
-          {rightColumnKeys.map((dateKey) => {
-            const matchesInside = dateGroups[dateKey] || [];
-            return (
-              <div 
-                key={dateKey} 
-                className="bg-neutral-900/40 border border-green-500/10 rounded-2xl p-4 space-y-3 shadow-xl backdrop-blur-sm transition-all duration-300 hover:border-green-500/20"
-              >
-                <div className="flex items-center justify-between border-b border-green-500/5 pb-2">
-                  <span className="mono-font text-xs font-bold text-[#00FF66] tracking-widest">{dateKey}</span>
-                  <span className="text-[9px] text-slate-500 mono-font">{matchesInside.length} MATCHES</span>
-                </div>
-                
-                <div className="space-y-2.5">
-                  {matchesInside.map((m) => {
-                    const isFav = favorites.includes(m.originalIndex);
-                    const colorStyle = groupColors[m.group] || { text: "text-green-400", bg: "bg-green-500" };
-                    return (
-                      <div 
-                        key={m.originalIndex}
-                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 rounded-xl bg-black/40 border border-green-500/5 hover:border-green-500/30 hover:bg-neutral-950/85 transition-all group"
-                      >
-                        {/* Group and match timing */}
-                        <div className="flex items-center gap-3 w-full sm:w-auto">
-                          <span 
-                            className={`text-[9px] font-extrabold px-2 py-0.5 rounded bg-black border border-green-500/20 ${colorStyle.text}`}
-                            title={`Group ${m.group}`}
-                          >
-                            GRP_{m.group}
-                          </span>
-                          <span className="mono-font text-xs font-semibold text-green-300">
-                            {m.parsedTime}
-                          </span>
-                        </div>
-
-                        {/* Central Match Flags Coupling */}
-                        <div className="flex-1 grid grid-cols-[1fr_auto_1fr] items-center gap-2.5 text-xs font-semibold w-full sm:w-auto text-center font-sans">
-                          <div className="text-right truncate text-slate-100" title={m.team1}>
-                            {m.team1}
-                          </div>
-                          <span className="text-[10px] mono-font text-[#00FF66]/80 px-1 bg-neutral-950 border border-green-500/10 rounded">VS</span>
-                          <div className="text-left truncate text-slate-100" title={m.team2}>
-                            {m.team2}
-                          </div>
-                        </div>
-
-                        {/* Venue location & Star trigger */}
-                        <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 border-green-500/5 pt-2 sm:pt-0 shrink-0">
-                          <div className="flex items-center gap-1 text-[11px] text-slate-500 font-sans">
-                            <MapPin className="w-3.5 h-3.5 text-green-500/50" />
-                            <span className="truncate max-w-[110px]" title={m.venue}>{m.venue}</span>
-                          </div>
-                          
-                          <button 
-                            onClick={() => toggleFavorite(m.originalIndex)} 
-                            className="p-1 rounded hover:bg-neutral-950 transition-all text-slate-600 hover:text-green-400 cursor-pointer"
-                          >
-                            <Star className={`w-3.5 h-3.5 ${isFav ? "fill-[#00FF66] text-[#00FF66]" : "text-slate-650"}`} />
-                          </button>
-                        </div>
-
+              
+              <div className="space-y-2.5">
+                {matchesInside.map((m) => {
+                  const isFav = favorites.includes(m.originalIndex);
+                  const colorStyle = groupColors[m.group] || { text: "text-green-400", bg: "bg-green-500" };
+                  return (
+                    <div 
+                      key={m.originalIndex}
+                      className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 rounded-xl bg-black/40 border border-green-500/5 hover:border-green-500/30 hover:bg-neutral-950/85 transition-all group"
+                    >
+                      {/* Group and match timing */}
+                      <div className="flex items-center gap-3 w-full sm:w-auto">
+                        <span 
+                          className={`text-[9px] font-extrabold px-2 py-0.5 rounded bg-black border border-green-500/20 ${colorStyle.text}`}
+                          title={`Group ${m.group}`}
+                        >
+                          GRP_{m.group}
+                        </span>
+                        <span className="mono-font text-xs font-semibold text-green-300">
+                          {m.parsedTime}
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
 
+                      {/* Central Match Flags Coupling */}
+                      <div className="flex-1 grid grid-cols-[1fr_auto_1fr] items-center gap-2.5 text-xs font-semibold w-full sm:w-auto text-center font-sans">
+                        <div className="text-right truncate text-slate-100" title={m.team1}>
+                          {m.team1}
+                        </div>
+                        {m.score ? (
+                          <span className="text-[10px] mono-font bg-green-500/10 text-[#00FF66] px-2 py-0.5 border border-green-500/30 rounded font-bold">
+                            {m.score}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] mono-font text-[#00FF66]/80 px-1 bg-neutral-950 border border-green-500/10 rounded">VS</span>
+                        )}
+                        <div className="text-left truncate text-slate-100" title={m.team2}>
+                          {m.team2}
+                        </div>
+                      </div>
+
+                      {/* Venue location & Star trigger */}
+                      <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 border-green-500/5 pt-2 sm:pt-0 shrink-0">
+                        <div className="flex items-center gap-1 text-[11px] text-slate-500 font-sans">
+                          <MapPin className="w-3.5 h-3.5 text-green-500/50" />
+                          <span className="truncate max-w-[110px]" title={m.venue}>{m.venue}</span>
+                        </div>
+                        
+                        <button 
+                          onClick={() => toggleFavorite(m.originalIndex)} 
+                          className="p-1 rounded hover:bg-neutral-950 transition-all text-slate-600 hover:text-green-400 cursor-pointer"
+                        >
+                          <Star className={`w-3.5 h-3.5 ${isFav ? "fill-[#00FF66] text-[#00FF66]" : "text-slate-650"}`} />
+                        </button>
+                      </div>
+
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
     </div>
