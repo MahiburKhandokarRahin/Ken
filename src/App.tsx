@@ -235,7 +235,7 @@ export default function App() {
   // Share platform copy action (never share/expose direct stream URLs)
   const [copied, setCopied] = useState(false);
   const handleShareClick = () => {
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText("https://kenstreaming.vercel.app/");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
